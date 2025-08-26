@@ -63,9 +63,9 @@
     <ul class="navbar-nav mb-md-3">
         
 
-         <li class="nav-item {{ Request::route()->named('students.index') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('students.index') ? 'active' : '' }}"
-                href="{{ route('enmployees.index') }}" wire:navigate>
+         <li class="nav-item {{ Request::route()->named('employees.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('employees.index') ? 'active' : '' }}"
+                href="{{ route('employees.index') }}" wire:navigate>
                 <i class="fas fa-dove text-orange"></i> empleados
             </a>
         </li>

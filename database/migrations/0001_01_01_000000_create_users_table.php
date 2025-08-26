@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('profile_image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -46,4 +47,11 @@ return new class extends Migration
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
+
+    public function getImageAttribute()
+{
+    return $this->attributes['profile_image'] 
+        ? asset('storage/' . $this->attributes['profile_image']) 
+        : asset('images/default-avatar.png'); // ruta a imagen por defecto
+}
 };

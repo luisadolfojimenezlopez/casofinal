@@ -4,12 +4,10 @@
             aria-expanded="false">
             <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{ auth()->user()->image() }}" class="img-fluid rounded-circle"
+                    <img alt="Image placeholder" src="src="{{ auth()->user()->image }}" class="img-fluid rounded-circle"
                         style="object-fit: cover;">
                 </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->name }}</span>
-                </div>
+                
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
