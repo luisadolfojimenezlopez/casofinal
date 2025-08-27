@@ -8,12 +8,12 @@ use App\Models\Schedule;
 
 class ScheduleController extends Controller
 {
-    //
 
 
- public function index(Request $request)
+    public function index()
     {
-        $schedules = Schedule::all();
+        $schedules = Schedule::latest()->paginate(5); // Obtenemos todos los horarios
+
         return view('schedules.index', compact('schedules'));
     }
 
@@ -22,15 +22,19 @@ class ScheduleController extends Controller
 // Muestra el formulario para crear una nueva área
 public function create()
 {
-    $schedule = new Schedule(); // Creamos un objeto vacío para reutilizar en la vista
-    return view('schedules.create', compact('schedule'));
+
+    $schedules = new Schedule(); // Creamos un objeto vacío para reutilizar en la vista
+
+    return view('schedules.create', compact('schedules'));
 }
 
 
 
 
-// Guarda una nueva justificación en la base de datos
+// Guarda una nueva área en la base de datos
 public function store(ScheduleRequest $request)
+
+
 {
     // Usamos el Form Request para validar y guardar directamente
     Schedule::create($request->validated());
@@ -42,11 +46,14 @@ public function store(ScheduleRequest $request)
 
 
 
-// Muestra los detalles de un horario específico
-public function show(Schedule $schedule)
+
+
+// Muestra los detalles de un área específica
+public function show(int $id)
 {
     // Retornamos la vista con el horario seleccionado
-    return view('schedules.show', compact('schedule'));
+    $schedules = Schedule::find($id);
+    return view('schedules.show', compact('schedules'));
 }
 
 
@@ -54,11 +61,14 @@ public function show(Schedule $schedule)
 
 
 
-// Muestra el formulario para editar un horario existente
-public function edit(Schedule $schedule)
+// Muestra el formulario para editar un área existente
+public function edit(int $id)
+
 {
-    // Retornamos la vista de edición con los datos del horario
-    return view('schedules.edit', compact('schedule'));
+    // Retornamos la vista de edición con los datos del área
+    $schedules = Schedule::find($id); // Encontramos el área por su ID
+
+    return view('schedules.edit', compact('schedules'));
 }
 
 
@@ -66,35 +76,36 @@ public function edit(Schedule $schedule)
 
 
 
-// Actualiza un horario existente en la base de datos
-public function update(ScheduleRequest $request, Schedule $schedule)
+// Actualiza un área existente en la base de datos
+public function update(ScheduleRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $schedule->update($request->validated());
+    $schedules = Schedule::find($id);
+    $schedules->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('schedules.index')
-                     ->with('success', 'Horario actualizado con éxito.');
+                     ->with('updated', 'Horario actualizado con éxito.');
 }
 
 
 
 
 
-// Elimina un horario de la base de datos
-public function destroy(Schedule $schedule)
+// Elimina un área de la base de datos
+public function destroy(int $id)
 {
-    // Borra el horario
-    $schedule->delete();
+    // Borra el área
+    $schedules = Schedule::find($id);
+    $schedules->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('schedules.index')
-                     ->with('success', 'Horario eliminado con éxito.');
+                     ->with('deleted', 'Horario eliminado con éxito.');
 }
 
 
 
 
-
-
 }
+ 

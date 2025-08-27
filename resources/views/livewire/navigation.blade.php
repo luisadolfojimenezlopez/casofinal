@@ -74,7 +74,72 @@
 
 
 
+         <li class="nav-item {{ Request::route()->named('areas.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('areas.index') ? 'active' : '' }}"
+                href="{{ route('areas.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> Areas
+            </a>
+        </li>
 
+
+
+
+
+         <li class="nav-item {{ Request::route()->named('areas.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('responsibles.index') ? 'active' : '' }}"
+                href="{{ route('responsibles.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> responsables
+            </a>
+        </li>
+
+
+
+
+
+
+         <li class="nav-item {{ Request::route()->named('schedules.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('areas.index') ? 'active' : '' }}"
+                href="{{ route('schedules.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> horarios
+            </a>
+        </li>
+
+
+
+
+
+
+
+        
+         <li class="nav-item {{ Request::route()->named('attendances.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('attendances.index') ? 'active' : '' }}"
+                href="{{ route('attendances.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> Asistencia
+            </a>
+        </li>
+
+
+
+
+
+         <li class="nav-item {{ Request::route()->named('justifications.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('justifications.index') ? 'active' : '' }}"
+                href="{{ route('justifications.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> Justificationes
+            </a>
+        </li>
+
+
+
+
+
+
+         <li class="nav-item {{ Request::route()->named('reports.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('reports.index') ? 'active' : '' }}"
+                href="{{ route('reports.index') }}" wire:navigate>
+                <i class="fas fa-dove text-orange"></i> Reportes
+            </a>
+        </li>
 
 
     </ul>

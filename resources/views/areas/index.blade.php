@@ -3,7 +3,7 @@
 
 
     @extends('layouts.panel')
-    @section('title', 'Employees')
+    @section('title', 'Areas')
 
     @section('content')
     <div class="row">
@@ -11,9 +11,9 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">employee</h3>
-                        <a href="{{ route('employees.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"> Nuevo empleado</i>
+                        <h3 class="mb-0">area</h3>
+                        <a href="{{ route('areas.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"> Nueva area</i>
                         </a>
                     </div>
                 </div>
@@ -24,37 +24,22 @@
                             <tr>
                                 <th scope="col">identificacio</th>
                                 <th scope="col">nombre</th>
-                                <th scope="col">direcion</th>
-                                <th scope="col">telefono</th>
-                                <th scope="col">profesion</th>
-                                <th scope="col">capacidad</th>
-                                <th scope="col">capacidad</th>
-                                <th scope="col">fecha de ingreso</th>
-                                <th scope="col">ID documento</th>
-                                <th scope="col">pais</th>
-                                <th scope="col">acciones</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($employees as $employee)
+                            @foreach ($areas as $area)
                             <tr>
-                                <td>{{ $employee->identification_employee }}</td>
-                                <td>{{ $employee->name }}</td>
-                                <td>{{ $employee->address }}</td>
-                                <td>{{ $employee->telephone }}</td>
-                                <td>{{ $employee->email }}</td>
-                                <td>{{ $employee->profession }}</td>
-                                <td>{{ $employee->entry_date }}</td>
-                                <td>{{ $employee->ID_document }}</td>
-                                <td>{{ $employee->country }}</td>
-
+                                <td>{{ $area->identification_area }}</td>
+                                <td>{{ $area->name }}</td>
+                               
 
                                 <td style="white-space: nowrap; display: flex; align-items: center;">
-                                    <a href="{{ route('employees.show', $employee->id) }}"
+                                    <a href="{{ route('areas.show', $employee->id) }}"
                                         class="btn btn-primary btn-sm" style="margin-right: 5px;">
                                         <i class="fas fa-eye">Mostrar</i>
                                     </a>
-                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-info btn-sm"
+                                    <a href="{{ route('areas.edit', $employee->id) }}" class="btn btn-info btn-sm"
                                         style="margin-right: 5px">
                                         <i class="fas fa-edit">Editar</i>
                                     </a>
@@ -76,7 +61,7 @@
 
                 <div class="card-footer py-4">
                     <nav aria-label="..." class="d-flex flex-wrap justify-content-center justify-content-lg-start">
-                        {{ $employees->links() }}
+                        {{ $areas->links() }}
                     </nav>
                 </div>
             </div>

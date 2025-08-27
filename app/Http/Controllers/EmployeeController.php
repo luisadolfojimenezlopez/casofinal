@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
-use app\Http\Requests\EmployeeRequest;
-class EmployeeController extends Controller
+use App\Http\Requests\EmployeeRequest;
 
+class EmployeeController extends Controller
   
 {
 
 
-    public function index(Request $request)
+    public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::latest()->paginate(5); // Obtenemos todos los empleados
+
         return view('employees.index', compact('employees'));
     }
 
@@ -23,8 +24,9 @@ class EmployeeController extends Controller
 public function create()
 {
 
-    $employee = new Employee(); // Creamos un objeto vacío para reutilizar en la vista
-    return view('employees.create', compact('employee'));
+    $employees = new Employee(); // Creamos un objeto vacío para reutilizar en la vista
+
+    return view('employees.create', compact('employees'));
 }
 
 
@@ -48,10 +50,11 @@ public function store(EmployeeRequest $request)
 
 
 // Muestra los detalles de un área específica
-public function show(Employee $employee)
+public function show(int $id)
 {
     // Retornamos la vista con el empleado seleccionado
-    return view('employees.show', compact('employee'));
+    $employees = Employee::find($id);
+    return view('employees.show', compact('employees'));
 }
 
 
@@ -60,10 +63,13 @@ public function show(Employee $employee)
 
 
 // Muestra el formulario para editar un área existente
-public function edit(Employee $employee)
+public function edit(int $id)
+
 {
     // Retornamos la vista de edición con los datos del área
-    return view('employees.edit', compact('employee'));
+        $employees = Employee::find($id); // Encontramos el área por su ID
+
+    return view('employees.edit', compact('employees'));
 }
 
 
@@ -72,10 +78,11 @@ public function edit(Employee $employee)
 
 
 // Actualiza un área existente en la base de datos
-public function update(EmployeeRequest $request, Employee $employee)
+public function update(EmployeeRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $employee->update($request->validated());
+    $employees = Employee::find($id);
+    $employees->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('employees.index')
@@ -90,8 +97,8 @@ public function update(EmployeeRequest $request, Employee $employee)
 public function destroy(int $id)
 {
     // Borra el área
-    $employee = Employee::find($id);
-    $employee->delete();
+    $employees = Employee::find($id);
+    $employees->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('employees.index')

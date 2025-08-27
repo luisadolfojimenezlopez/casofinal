@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ResponsibleController;
+use App\Http\Controllers\JustificationController;
 
 
-
+use App\Models\Responsible;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +41,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('/employees', EmployeeController::class);
+    Route::resource('/areas', AreaController::class);
+    Route::resource('/responsibles', ResponsibleController::class);
+    Route::resource('/schedules', ScheduleController::class);
+    Route::resource('/attendandes', AttendanceController::class);
+    Route::resource('/justifications', JustificationController::class);
+
 
     // Route::resource('/animals', AnimalController::class);
 });

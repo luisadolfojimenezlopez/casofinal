@@ -8,12 +8,12 @@ use app\Http\Requests\ReportRequest;
 
 class ReportController extends Controller
 {
-    //
 
 
- public function index(Request $request)
+    public function index()
     {
-        $reports = Report::all();
+        $reports = Report::latest()->paginate(5); // Obtenemos todos los reportes
+
         return view('reports.index', compact('reports'));
     }
 
@@ -22,15 +22,19 @@ class ReportController extends Controller
 // Muestra el formulario para crear una nueva área
 public function create()
 {
-    $report = new Report(); // Creamos un objeto vacío para reutilizar en la vista
-    return view('reports.create', compact('report'));
+
+    $reports = new Report(); // Creamos un objeto vacío para reutilizar en la vista
+
+    return view('reports.create', compact('reports'));
 }
 
 
 
 
-// Guarda una nueva justificación en la base de datos
+// Guarda una nueva área en la base de datos
 public function store(ReportRequest $request)
+
+
 {
     // Usamos el Form Request para validar y guardar directamente
     Report::create($request->validated());
@@ -44,11 +48,12 @@ public function store(ReportRequest $request)
 
 
 
-// Muestra los detalles de un reporte específico
-public function show(Report $report)
+// Muestra los detalles de un área específica
+public function show(int $id)
 {
     // Retornamos la vista con el reporte seleccionado
-    return view('reports.show', compact('report'));
+    $reports = Report::find($id);
+    return view('reports.show', compact('reports'));
 }
 
 
@@ -56,11 +61,14 @@ public function show(Report $report)
 
 
 
-// Muestra el formulario para editar un reporte existente
-public function edit(Report $report)
+// Muestra el formulario para editar un área existente
+public function edit(int $id)
+
 {
-    // Retornamos la vista de edición con los datos del reporte
-    return view('reports.edit', compact('report'));
+    // Retornamos la vista de edición con los datos del área
+    $reports = Report::find($id); // Encontramos el área por su ID
+
+    return view('reports.edit', compact('reports'));
 }
 
 
@@ -68,47 +76,39 @@ public function edit(Report $report)
 
 
 
-// Actualiza un reporte existente en la base de datos
-public function update(ReportRequest $request, Report $report)
+// Actualiza un área existente en la base de datos
+public function update(ReportRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $report->update($request->validated());
+    $reports = Report::find($id);
+    $reports->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('reports.index')
-                     ->with('success', 'Reporte actualizado con éxito.');
+                     ->with('updated', 'Reporte actualizado con éxito.');
 }
 
 
 
 
 
-// Elimina un reporte de la base de datos
-public function destroy(Report $report)
+// Elimina un área de la base de datos
+public function destroy(int $id)
 {
-    // Borra el reporte
-    $report->delete();
+    // Borra el área
+    $reports = Report::find($id);
+    $reports->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('reports.index')
-                     ->with('success', 'Reporte eliminado con éxito.');
+                     ->with('deleted', 'Reporte eliminado con éxito.');
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+ 
+
+
+

@@ -9,13 +9,12 @@ use app\Http\Requests\AreaRequest;
 
 class AreaController extends Controller
 {
-    //
 
 
-
-    public function index(Request $request)
+    public function index()
     {
-        $areas = Area::all();
+        $areas = Area::latest()->paginate(5); // Obtenemos todas las áreas
+
         return view('areas.index', compact('areas'));
     }
 
@@ -24,8 +23,10 @@ class AreaController extends Controller
 // Muestra el formulario para crear una nueva área
 public function create()
 {
-    $area = new Area(); // Creamos un objeto vacío para reutilizar en la vista
-    return view('area.create', compact('area'));
+
+    $areas = new Area(); // Creamos un objeto vacío para reutilizar en la vista
+
+    return view('areas.create', compact('areas'));
 }
 
 
@@ -49,10 +50,11 @@ public function store(AreaRequest $request)
 
 
 // Muestra los detalles de un área específica
-public function show(Area $area)
+public function show(int $id)
 {
     // Retornamos la vista con el área seleccionada
-    return view('areas.show', compact('area'));
+    $areas = Area::find($id);
+    return view('areas.show', compact('areas'));
 }
 
 
@@ -61,10 +63,13 @@ public function show(Area $area)
 
 
 // Muestra el formulario para editar un área existente
-public function edit(Area $area)
+public function edit(int $id)
+
 {
     // Retornamos la vista de edición con los datos del área
-    return view('areas.edit', compact('area'));
+    $areas = Area::find($id); // Encontramos el área por su ID
+
+    return view('areas.edit', compact('areas'));
 }
 
 
@@ -73,14 +78,15 @@ public function edit(Area $area)
 
 
 // Actualiza un área existente en la base de datos
-public function update(AreaRequest $request, Area $area)
+public function update(AreaRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $area->update($request->validated());
+    $areas = Area::find($id);
+    $areas->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('areas.index')
-                     ->with('success', 'Área actualizada con éxito.');
+                     ->with('updated', 'Área actualizada con éxito.');
 }
 
 
@@ -88,17 +94,19 @@ public function update(AreaRequest $request, Area $area)
 
 
 // Elimina un área de la base de datos
-public function destroy(Area $area)
+public function destroy(int $id)
 {
     // Borra el área
-    $area->delete();
+    $areas = Area::find($id);
+    $areas->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('areas.index')
-                     ->with('success', 'Área eliminada con éxito.');
+                     ->with('deleted', 'Área eliminada con éxito.');
 }
 
 
 
 
 }
+ 

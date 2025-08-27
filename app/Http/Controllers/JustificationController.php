@@ -10,9 +10,10 @@ class JustificationController extends Controller
 {
 
 
-    public function index(Request $request)
+    public function index()
     {
-        $justifications = Justification::all();
+        $justifications = Justification::latest()->paginate(5); // Obtenemos todas las justificaciones
+
         return view('justifications.index', compact('justifications'));
     }
 
@@ -21,15 +22,19 @@ class JustificationController extends Controller
 // Muestra el formulario para crear una nueva área
 public function create()
 {
+
     $justification = new Justification(); // Creamos un objeto vacío para reutilizar en la vista
+
     return view('justifications.create', compact('justification'));
 }
 
 
 
 
-// Guarda una nueva justificación en la base de datos
+// Guarda una nueva área en la base de datos
 public function store(JustificationRequest $request)
+
+
 {
     // Usamos el Form Request para validar y guardar directamente
     Justification::create($request->validated());
@@ -43,10 +48,11 @@ public function store(JustificationRequest $request)
 
 
 
-// Muestra los detalles de una justificación específica
-public function show(Justification $justification)
+// Muestra los detalles de un área específica
+public function show(int $id)
 {
     // Retornamos la vista con la justificación seleccionada
+    $justification = Justification::find($id);
     return view('justifications.show', compact('justification'));
 }
 
@@ -55,10 +61,13 @@ public function show(Justification $justification)
 
 
 
-// Muestra el formulario para editar una justificación existente
-public function edit(Justification $justification)
+// Muestra el formulario para editar un área existente
+public function edit(int $id)
+
 {
-    // Retornamos la vista de edición con los datos de la justificación
+    // Retornamos la vista de edición con los datos del área
+    $justifications = Justification::find($id); // Encontramos el área por su ID
+
     return view('justifications.edit', compact('justification'));
 }
 
@@ -67,33 +76,36 @@ public function edit(Justification $justification)
 
 
 
-// Actualiza una justificación existente en la base de datos
-public function update(JustificationRequest $request, Justification $justification)
+// Actualiza un área existente en la base de datos
+public function update(JustificationRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
+    $justification = Justification::find($id);
     $justification->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('justifications.index')
-                     ->with('success', 'Justificación actualizada con éxito.');
+                     ->with('updated', 'Justificación actualizada con éxito.');
 }
 
 
 
 
 
-// Elimina una justificación de la base de datos
-public function destroy(Justification $justification)
+// Elimina un área de la base de datos
+public function destroy(int $id)
 {
-    // Borra la justificación
+    // Borra el área
+    $justification = Justification::find($id);
     $justification->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('justifications.index')
-                     ->with('success', 'Justificación eliminada con éxito.');
+                     ->with('deleted', 'Justificación eliminada con éxito.');
 }
 
 
 
 
 }
+ 

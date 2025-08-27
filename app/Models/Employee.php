@@ -11,7 +11,7 @@ class Employee extends Model
 protected $perpage = 10;
 
     protected $fillable = [
-        'employee_id',
+        'identification_employee',
         'name',
         'address',
         'telephono',

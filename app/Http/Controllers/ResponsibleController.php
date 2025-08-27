@@ -8,12 +8,12 @@ use app\Http\Requests\ResponsibleRequest;
 
 class ResponsibleController extends Controller
 {
-    //
 
 
- public function index(Request $request)
+    public function index()
     {
-        $responsibles = Responsible::all();
+        $responsibles = Responsible::latest()->paginate(5); // Obtenemos todos los responsables
+
         return view('responsibles.index', compact('responsibles'));
     }
 
@@ -22,15 +22,19 @@ class ResponsibleController extends Controller
 // Muestra el formulario para crear una nueva área
 public function create()
 {
-    $responsible = new Responsible(); // Creamos un objeto vacío para reutilizar en la vista
-    return view('responsibles.create', compact('responsible'));
+
+    $responsibles = new Responsible(); // Creamos un objeto vacío para reutilizar en la vista
+
+    return view('responsibles.create', compact('responsibles'));
 }
 
 
 
 
-// Guarda una nueva justificación en la base de datos
+// Guarda una nueva área en la base de datos
 public function store(ResponsibleRequest $request)
+
+
 {
     // Usamos el Form Request para validar y guardar directamente
     Responsible::create($request->validated());
@@ -44,11 +48,12 @@ public function store(ResponsibleRequest $request)
 
 
 
-// Muestra los detalles de un responsable específico
-public function show(Responsible $responsible)
+// Muestra los detalles de un área específica
+public function show(int $id)
 {
     // Retornamos la vista con el responsable seleccionado
-    return view('responsibles.show', compact('responsible'));
+    $responsibles = Responsible::find($id);
+    return view('responsibles.show', compact('responsibles'));
 }
 
 
@@ -56,11 +61,14 @@ public function show(Responsible $responsible)
 
 
 
-// Muestra el formulario para editar un responsable existente
-public function edit(Responsible $responsible)
+// Muestra el formulario para editar un área existente
+public function edit(int $id)
+
 {
-    // Retornamos la vista de edición con los datos del responsable
-    return view('responsibles.edit', compact('responsible'));
+    // Retornamos la vista de edición con los datos del área
+    $responsibles = Responsible::find($id); // Encontramos el área por su ID
+
+    return view('responsibles.edit', compact('responsibles'));
 }
 
 
@@ -68,47 +76,38 @@ public function edit(Responsible $responsible)
 
 
 
-// Actualiza un responsable existente en la base de datos
-public function update(ResponsibleRequest $request, Responsible $responsible)
+// Actualiza un área existente en la base de datos
+public function update(ResponsibleRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $responsible->update($request->validated());
+    $responsibles = Responsible::find($id);
+    $responsibles->update($request->validated());
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('responsibles.index')
-                     ->with('success', 'Responsable actualizado con éxito.');
+                     ->with('updated', 'Responsable actualizado con éxito.');
 }
 
 
 
 
 
-// Elimina un responsable de la base de datos
-public function destroy(Responsible $responsible)
+// Elimina un área de la base de datos
+public function destroy(int $id)
 {
-    // Borra el responsable
-    $responsible->delete();
+    // Borra el área
+    $responsibles = Responsible::find($id);
+    $responsibles->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('responsibles.index')
-                     ->with('success', 'Responsable eliminado con éxito.');
+                     ->with('deleted', 'Responsable eliminado con éxito.');
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+ 
+
+
