@@ -26,9 +26,9 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> Nombre
+                        <i class="fas fa-calendar-alt"></i> Id de justificacion
                     </label>
-                    <p>{{ $justification->name }}</p>
+                    <p>{{ $justification->id_justification }}</p>
                 </div>
             </div>
         </div>
@@ -42,9 +42,88 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> country
+                        <i class="fas fa-calendar-alt"></i> Nombre de empleado
                     </label>
-                    <p>{{ $employee->country }}</p>
+                    <p>{{ $justification->employees_name }}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i> fecha de incidente
+                    </label>
+                    <p>{{ $justification->incident_date }}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i> tipo de incidente
+                    </label>
+                    <p>{{ $justification->type_of_justification }}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i> tipo de documento
+                    </label>
+                    <p>{{ $justification->document_type }}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i>llegadas tardes
+                    </label>
+                    <p>{{ $justification->late_arrival }}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i>codigo de trabajador
+                        
+                    </label>
+                    <p>{{ $justification->worker_code }}</p>
                 </div>
             </div>
         </div>

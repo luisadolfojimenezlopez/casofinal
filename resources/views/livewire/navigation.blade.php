@@ -114,7 +114,7 @@
          <li class="nav-item {{ Request::route()->named('attendances.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('attendances.index') ? 'active' : '' }}"
                 href="{{ route('attendances.index') }}" wire:navigate>
-                <i class="fas fa-dove text-orange"></i> Asistencia
+                <i class="fas fa-image text-dark"></i> Asistencia
             </a>
         </li>
 

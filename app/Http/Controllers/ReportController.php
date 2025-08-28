@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Report;
+use App\Models\Employee;
+use App\Models\Area;
+use App\Models\Justification;
 
 use Illuminate\Http\Request;
 use app\Http\Requests\ReportRequest;
+use App\Models\Responsible;
 
 class ReportController extends Controller
 {
@@ -12,20 +16,20 @@ class ReportController extends Controller
 
     public function index()
     {
-        $reports = Report::latest()->paginate(5); // Obtenemos todos los reportes
-
-        return view('reports.index', compact('reports'));
+        $reports = Report::with('employee')->paginate(5); // Obtenemos todos los reportes
+        return view('reports.index', compact('reports', 'employees'));
     }
 
 
 
-// Muestra el formulario para crear una nueva área
+// Muestra el formulario para crear un nuevo reporte
 public function create()
 {
 
-    $reports = new Report(); // Creamos un objeto vacío para reutilizar en la vista
 
-    return view('reports.create', compact('reports'));
+    $report = new Report(); // Creamos un objeto vacío para reutilizar en la vista
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('reports.create', compact('report', 'employees'));
 }
 
 
@@ -52,8 +56,15 @@ public function store(ReportRequest $request)
 public function show(int $id)
 {
     // Retornamos la vista con el reporte seleccionado
-    $reports = Report::find($id);
-    return view('reports.show', compact('reports'));
+    $report = Report::find($id);
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    $responsibles = Responsible::all();
+    $areas = Area::all();
+    $justifications = Justification::all();
+    $responsibles = Responsible::all();
+
+    return view('reports.show', compact('report', 'employees', 'responsibles', 'areas', 'justifications'));
+
 }
 
 
@@ -65,10 +76,10 @@ public function show(int $id)
 public function edit(int $id)
 
 {
-    // Retornamos la vista de edición con los datos del área
-    $reports = Report::find($id); // Encontramos el área por su ID
-
-    return view('reports.edit', compact('reports'));
+    // Retornamos la vista de edición con los datos del reporte
+   $report = Report::find($id); // Encontramos el reporte por su ID
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('reports.edit', compact('report', 'employees'));
 }
 
 
@@ -80,12 +91,11 @@ public function edit(int $id)
 public function update(ReportRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $reports = Report::find($id);
-    $reports->update($request->validated());
+    $report = Report::find($id);
+    $report->update($request->validated());
 
     // Redirigimos con mensaje de éxito
-    return redirect()->route('reports.index')
-                     ->with('updated', 'Reporte actualizado con éxito.');
+    return redirect()->route('reports.index')->with('updated', 'Reporte actualizado con éxito.');
 }
 
 
@@ -96,8 +106,8 @@ public function update(ReportRequest $request, int $id)
 public function destroy(int $id)
 {
     // Borra el área
-    $reports = Report::find($id);
-    $reports->delete();
+    $report = Report::find($id);
+    $report->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('reports.index')
@@ -108,6 +118,7 @@ public function destroy(int $id)
 
 
 }
+ 
  
 
 

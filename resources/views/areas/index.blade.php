@@ -6,7 +6,7 @@
     @section('title', 'Areas')
 
     @section('content')
-    <div class="row">
+    <div class="row" style="color: blue;" >
         <div class="col">
             <div class="card shadow">
                 <div class="card-header border-0">
@@ -22,28 +22,41 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">identificacio</th>
-                                <th scope="col">nombre</th>
+                                <th scope="col">id_area</th>
+                                <th scope="col">human_resources</th>
+                                <th scope="col">security</th>
+                                <th scope="col">teaching</th>
+                                <th scope="col">cleaning</th>
+                                <th scope="col">administration</th>
+                                <th scope="col">accounting</th>
+                                
+                                
+                                
                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($areas as $area)
                             <tr>
-                                <td>{{ $area->identification_area }}</td>
-                                <td>{{ $area->name }}</td>
+                                <td>{{ $area->id_area}}</td>
+                                <td>{{ $area->human_resources }}</td>
+                                <td>{{ $area->teaching }}</td>
+                                <td>{{ $area->security }}</td>
+                                <td>{{ $area->cleaning}}</td>
+                                <td>{{ $area->administration}}</td>
+                                <td>{{ $area->accounting}}</td>
                                
 
                                 <td style="white-space: nowrap; display: flex; align-items: center;">
-                                    <a href="{{ route('areas.show', $employee->id) }}"
+                                    <a href="{{ route('areas.show', $area->id) }}"
                                         class="btn btn-primary btn-sm" style="margin-right: 5px;">
                                         <i class="fas fa-eye">Mostrar</i>
                                     </a>
-                                    <a href="{{ route('areas.edit', $employee->id) }}" class="btn btn-info btn-sm"
+                                    <a href="{{ route('areas.edit', $area->id) }}" class="btn btn-info btn-sm"
                                         style="margin-right: 5px">
                                         <i class="fas fa-edit">Editar</i>
                                     </a>
-                                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST"
+                                    <form action="{{ route('areas.destroy', $area->id) }}" method="POST"
                                         style="display: inline-block; margin: 0; display: flex; align-items: center;"
                                         onsubmit="return confirm('¿Está seguro que desea eliminar este empleado? Esta acción no se puede deshacer.')">
                                         @csrf

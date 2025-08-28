@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Http\Requests\AttendanceRequest;
 use App\Models\Attendance;
+use App\Models\Employee;
 
 class AttendanceController extends Controller
 
@@ -13,20 +14,20 @@ class AttendanceController extends Controller
 
     public function index()
     {
-        $attendances = Attendance::latest()->paginate(5); // Obtenemos todos los registros de asistencia
-
-        return view('attendances.index', compact('attendances'));
+        $attendances = Attendance::with('employee')->paginate(5); // Obtenemos todos los registros de asistencia
+        return view('attendances.index', compact('attendances', 'employees'));
     }
 
 
 
-// Muestra el formulario para crear una nueva área
+// Muestra el formulario para crear un nuevo reporte
 public function create()
 {
 
-    $attendances = new Attendance(); // Creamos un objeto vacío para reutilizar en la vista
 
-    return view('attendances.create', compact('attendances'));
+    $attendance = new Attendance(); // Creamos un objeto vacío para reutilizar en la vista
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('attendances.create', compact('attendance', 'employees'));
 }
 
 
@@ -42,7 +43,7 @@ public function store(AttendanceRequest $request)
 
     // Redirigimos con mensaje de éxito
     return redirect()->route('attendances.index')
-                     ->with('success', 'Registro de asistencia creado con éxito.');
+                     ->with('success', 'Asistencia creada con éxito.');
 }
 
 
@@ -53,8 +54,9 @@ public function store(AttendanceRequest $request)
 public function show(int $id)
 {
     // Retornamos la vista con el registro de asistencia seleccionado
-    $attendances = Attendance::find($id);
-    return view('attendances.show', compact('attendances'));
+    $attendance = Attendance::find($id);
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('attendances.show', compact('attendance', 'employees'));
 }
 
 
@@ -67,9 +69,9 @@ public function edit(int $id)
 
 {
     // Retornamos la vista de edición con los datos del registro de asistencia
-    $attendances = Attendance::find($id); // Encontramos el registro por su ID
-
-    return view('attendances.edit', compact('attendances'));
+   $attendance = Attendance::find($id); // Encontramos el registro de asistencia por su ID
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('attendances.edit', compact('attendance', 'employees'));
 }
 
 
@@ -81,12 +83,11 @@ public function edit(int $id)
 public function update(AttendanceRequest $request, int $id)
 {
     // Usamos el Form Request para validar y actualizar directamente
-    $attendances = Attendance::find($id);
-    $attendances->update($request->validated());
+    $attendance = Attendance::find($id);
+    $attendance->update($request->validated());
 
     // Redirigimos con mensaje de éxito
-    return redirect()->route('attendances.index')
-                     ->with('updated', 'Registro de asistencia actualizado con éxito.');
+    return redirect()->route('attendances.index')->with('updated', 'Asistencia actualizada con éxito.');
 }
 
 
@@ -97,16 +98,15 @@ public function update(AttendanceRequest $request, int $id)
 public function destroy(int $id)
 {
     // Borra el área
-    $attendances = Attendance::find($id);
-    $attendances->delete();
+    $attendance = Attendance::find($id);
+    $attendance->delete();
 
     // Redirige con mensaje de éxito
     return redirect()->route('attendances.index')
-                     ->with('deleted', 'Registro de asistencia eliminado con éxito.');
+                     ->with('deleted', 'Asistencia eliminada con éxito.');
 }
 
 
 
 
 }
- 

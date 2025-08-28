@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Area;
 use app\Http\Requests\AreaRequest;
 
+use App\Models\Employee;
+
 
 class AreaController extends Controller
 {
@@ -13,8 +15,7 @@ class AreaController extends Controller
 
     public function index()
     {
-        $areas = Area::latest()->paginate(5); // Obtenemos todas las áreas
-
+        $areas = Area::with('employee')->paginate(5); // Obtenemos todas las áreas
         return view('areas.index', compact('areas'));
     }
 
@@ -25,8 +26,8 @@ public function create()
 {
 
     $areas = new Area(); // Creamos un objeto vacío para reutilizar en la vista
-
-    return view('areas.create', compact('areas'));
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('areas.create', compact('areas', 'employees'));
 }
 
 
@@ -39,10 +40,9 @@ public function store(AreaRequest $request)
 {
     // Usamos el Form Request para validar y guardar directamente
     Area::create($request->validated());
-
+    
     // Redirigimos con mensaje de éxito
-    return redirect()->route('areas.index')
-                     ->with('success', 'Área creada con éxito.');
+    return redirect()->route('areas.index')->with('success', 'Área creada con éxito.');
 }
 
 
@@ -54,7 +54,8 @@ public function show(int $id)
 {
     // Retornamos la vista con el área seleccionada
     $areas = Area::find($id);
-    return view('areas.show', compact('areas'));
+    $employees = Employee::all(); // Obtenemos todos los empleados
+    return view('areas.show', compact('areas', 'employees'));
 }
 
 
@@ -68,7 +69,7 @@ public function edit(int $id)
 {
     // Retornamos la vista de edición con los datos del área
     $areas = Area::find($id); // Encontramos el área por su ID
-
+    $employees = Employee::all(); // Obtenemos todos los empleados
     return view('areas.edit', compact('areas'));
 }
 
@@ -85,8 +86,7 @@ public function update(AreaRequest $request, int $id)
     $areas->update($request->validated());
 
     // Redirigimos con mensaje de éxito
-    return redirect()->route('areas.index')
-                     ->with('updated', 'Área actualizada con éxito.');
+    return redirect()->route('areas.index')->with('updated', 'Área actualizada con éxito.');
 }
 
 
@@ -101,8 +101,7 @@ public function destroy(int $id)
     $areas->delete();
 
     // Redirige con mensaje de éxito
-    return redirect()->route('areas.index')
-                     ->with('deleted', 'Área eliminada con éxito.');
+    return redirect()->route('areas.index')->with('deleted', 'Área eliminada con éxito.');
 }
 
 

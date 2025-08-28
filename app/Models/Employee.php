@@ -14,7 +14,7 @@ protected $perpage = 10;
         'identification_employee',
         'name',
         'address',
-        'telephono',
+        'telephone',
         'email',
         'profession',
         'entry_date',

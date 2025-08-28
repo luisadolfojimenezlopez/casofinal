@@ -22,17 +22,26 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">identificacio</th>
-                                <th scope="col">nombre</th>
-                               
+                                <th scope="col">id_justificacion</th>
+                                <th scope="col">nombre de empleado</th>
+                                <th scope="col">dia del incidente</th>
+                                <th scope="col">tipo del incidente</th>
+                                <th scope="col">tipo de documento</th>
+                                <th scope="col">tipo de llegada tarde</th>
+                                <th scope="col">código de trabajador</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($justifications as $justification)
                             <tr>
-                                <td>{{ $area->identification_area }}</td>
-                                <td>{{ $area->name }}</td>
-                               
+                                <td>{{ $justification->id_justification }}</td>
+                                <td>{{ $justification->employees_name }}</td>
+                                <td>{{ $justification->incident_date }}</td>
+                                <td>{{ $justification->type_of_justification }}</td>
+                                <td>{{ $justification->document_type }}</td>
+                                <td>{{ $justification->late_arrival }}</td>
+                                <td>{{ $justification->worker_code }}</td>
 
                                 <td style="white-space: nowrap; display: flex; align-items: center;">
                                     <a href="{{ route('justifications.show', $justification->id) }}"

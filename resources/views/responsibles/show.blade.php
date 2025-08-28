@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('title', 'Employees/Show')
+@section('title', 'Responsibles/Show')
 
 @section('content')
 <div class="col-xl-12 order-xl-1">
@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="col-4 text-right">
-                    <a href="{{ route('employees.index') }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('responsibles.index') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-arrow-left"></i> Volver
                     </a>
                 </div>
@@ -28,7 +28,7 @@
                     <label class="form-control-label">
                         <i class="fas fa-calendar-alt"></i> Nombre
                     </label>
-                    <p>{{ $employee->name }}</p>
+                    <p>{{ $responsible->name }}</p>
                 </div>
             </div>
         </div>
@@ -37,9 +37,9 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> estado
+                        <i class="fas fa-calendar-alt"></i> correo
                     </label>
-                    <p>{{ $employee->address }}</p>
+                    <p>{{ $responsible->email }}</p>
                 </div>
             </div>
         </div>
@@ -53,62 +53,9 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> responsable
+                        <i class="fas fa-calendar-alt"></i> telefono
                     </label>
-                    <p>{{ $employee->telephone }}</p>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> ubicacion
-                    </label>
-                    <p>{{ $employee->email }}</p>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> tipo
-                    </label>
-                    <p>{{ $employee->profession }}</p>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> capacity
-                    </label>
-                    <p>{{ $employee->entry_date }}</p>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> capacity
-                    </label>
-                    <p>{{ $employee->ID_document }}</p>
+                    <p>{{ $responsible->telephone }}</p>
                 </div>
             </div>
         </div>
@@ -120,12 +67,17 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <i class="fas fa-calendar-alt"></i> country
+                        <i class="fas fa-calendar-alt"></i> id empleado
                     </label>
-                    <p>{{ $employee->country }}</p>
+                    <p>{{ $responsible->employee_id }}</p>
                 </div>
             </div>
         </div>
+
+
+
+
+
 
     </div>
 </div>

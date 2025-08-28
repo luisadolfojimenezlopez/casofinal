@@ -8,18 +8,18 @@
 
             <div class="form-group">
 
-                <label for="form-control-label" form="identification_employee">nombre del empleado</label>
-                <input type="text" id="identification_employee" name="identification_employee"
-                    class="form-control form-control-alternative" placeholder="ingresar nombre del empleado"
+                <label for="form-control-label" form="identification_employee">id del empleado</label>
+                <input type="number" id="identification_employee" name="identification_employee"
+                    class="form-control form-control-alternative" placeholder="ingresar id del empleado"
                     value="{{old('identification_employee',$employees->identification_employee)}}">
             </div>
 
 
             <div class="form-group">
 
-                <label for="form-control-label" form="state">estado del empleado</label>
-                <input type="text" id="state" name="state" class="form-control form-control-alternative"
-                    placeholder="ingresar estado del empleado" value="{{old('state',$employees->state)}}">
+                <label for="form-control-label" form="state">nombre del empleado</label>
+                <input type="text" id="name" name="name" class="form-control form-control-alternative"
+                    placeholder="ingresar nombre del empleado" value="{{old('name',$employees->name)}}">
             </div>
 
 
@@ -47,10 +47,24 @@
 
             <div class="form-group">
 
+                <label for="form-control-label" form="email">email de empleado</label>
+                <input type="email" id="email" name="email" class="form-control form-control-alternative"
+                    placeholder="email" value="{{old('email',$employees->email)}}">
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+
                 <label for="form-control-label" form="profession">profesion de empleado</label>
                 <input type="text" id="profession" name="profession" class="form-control form-control-alternative"
-                    placeholder="profession" value="{{old('profession',$employees->profession)}}">
+                    placeholder="profesion" value="{{old('profession',$employees->profession)}}">
             </div>
+
+
 
 
 
@@ -60,7 +74,6 @@
                 <input type="date" id="entry_date" name="entry_date" class="form-control form-control-alternative"
                     placeholder="entry_date" value="{{old('entry_date',$employees->entry_date)}}">
             </div>
-
 
 
 
@@ -88,17 +101,8 @@
 
 
 
-
-
-
-
-
                 </div>
             </div>
-
-
-
-
 
 
 

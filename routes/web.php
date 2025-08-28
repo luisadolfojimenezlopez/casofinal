@@ -10,6 +10,8 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ResponsibleController;
 use App\Http\Controllers\JustificationController;
+use App\Http\Controllers\ReportController;
+
 
 
 use App\Models\Responsible;
@@ -44,9 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/areas', AreaController::class);
     Route::resource('/responsibles', ResponsibleController::class);
     Route::resource('/schedules', ScheduleController::class);
-    Route::resource('/attendandes', AttendanceController::class);
+    Route::resource('/attendances', AttendanceController::class);
     Route::resource('/justifications', JustificationController::class);
-
+    Route::resource('/reports', ReportController::class);
 
     // Route::resource('/animals', AnimalController::class);
 });

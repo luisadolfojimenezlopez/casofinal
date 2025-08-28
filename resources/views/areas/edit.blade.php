@@ -1,10 +1,4 @@
 
-
-<div>
-    <!-- Simplicity is the consequence of refined emotions. - Jean D'Alembert -->
-
-
-
 @extends('layouts.panel')
 
 @section('title', 'areas/editar')
@@ -26,7 +20,7 @@
             </div>
         </div>
         <div class="card-body container-fluid">
-            <form action="{{ route('areas.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('areas.update', $areas->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('areas.form')
             </form>

@@ -22,10 +22,10 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
     return [
-        'employee_id' => 'required|exists:employees,id',
+    'identification_employee' => 'required|string|min:3|max:255',
     'name'        => 'required|string|min:3|max:255',
     'address'     => 'required|string|min:5|max:255',
-    'telefono'    => 'required|string|min:8|max:20',
+    'telephone'    => 'required|string|min:8|max:20',
     'email'       => 'required|email|min:5|max:255|unique:employees,email',
     'profession'  => 'required|string|min:3|max:255',
     'entry_date'  => 'required|date',
@@ -37,8 +37,10 @@ class EmployeeRequest extends FormRequest
 public function messages()
 {
     return [
-       'employee_id.required' => 'El campo ID del empleado es obligatorio',
-'employee_id.exists'   => 'El ID del empleado no existe en la base de datos',
+'identification_employee.required' => 'El campo ID del empleado es obligatorio',
+'identification_employee.string'   => 'El campo ID del empleado debe ser una cadena de texto',
+'identification_employee.min'      => 'El campo ID del empleado debe tener al menos 3 caracteres',
+'identification_employee.max'      => 'El campo ID del empleado no debe exceder los 255 caracteres',
 
 'name.required' => 'El campo nombre es obligatorio',
 'name.string'   => 'El campo nombre debe ser una cadena de texto',
@@ -50,10 +52,10 @@ public function messages()
 'address.min'      => 'El campo dirección debe tener al menos 5 caracteres',
 'address.max'      => 'El campo dirección no debe exceder los 255 caracteres',
 
-'telefono.required' => 'El campo teléfono es obligatorio',
-'telefono.string'   => 'El campo teléfono debe ser una cadena de texto',
-'telefono.min'      => 'El campo teléfono debe tener al menos 8 caracteres',
-'telefono.max'      => 'El campo teléfono no debe exceder los 20 caracteres',
+'telephone.required' => 'El campo teléfono es obligatorio',
+'telephone.string'   => 'El campo teléfono debe ser una cadena de texto',
+'telephone.min'      => 'El campo teléfono debe tener al menos 8 caracteres',
+'telephone.max'      => 'El campo teléfono no debe exceder los 20 caracteres',
 
 'email.required' => 'El campo correo electrónico es obligatorio',
 'email.email'    => 'El campo correo electrónico debe ser una dirección de correo válida',
