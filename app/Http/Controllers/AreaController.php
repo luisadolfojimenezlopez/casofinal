@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Area;
-use app\Http\Requests\AreaRequest;
+use App\Http\Requests\AreaRequest;
 
 use App\Models\Employee;
 

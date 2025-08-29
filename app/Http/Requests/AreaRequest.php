@@ -23,13 +23,20 @@ class AreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_area' => ['required|string|min:5|max:200', Rule::unique('areas')->ignore($this->area)],
+            'id_area' => [
+                'required',
+                'string',
+                'min:1',
+                'max:200',
+                Rule::unique('areas', 'id_area')->ignore($this->route('area'))
+            ],
             'human_resources' => 'required|string|min:8|max:50',
             'teaching' => 'required|string|min:10|max:200',
             'security' => 'required|string|max:20',
-            'cleaning' => 'required', 'string', 'min:8', 
+            'cleaning' => 'required|string|min:8',
             'administration' => 'required|string|max:150',
             'accounting' => 'required|string|min:4|max:50',
+            'employee_id' => 'required|exists:employees,id',
         ];
     }
     public function messages()
@@ -73,7 +80,10 @@ class AreaRequest extends FormRequest
             'accounting.min' => 'Como mínimo 4 caracteres',
             'accounting.max' => 'Como máximo 50 caracteres',
 
-
+            'employee_id.required' => 'El campo de empleado es obligatorio',
+            'employee_id.exists' => 'El empleado seleccionado no es válido',
+            'employee_id.min' => 'Como mínimo 1 carácter',
+            'employee_id.max' => 'Como máximo 50 caracteres',
 
 
         ];

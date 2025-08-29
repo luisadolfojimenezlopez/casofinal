@@ -138,6 +138,16 @@
 
 
 
+<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <i class="fas fa-calendar-alt"></i> id del empleador
+                    </label>
+                    <p>{{ $areas->employee_id }}</p>
+                </div>
+            </div>
+        </div>
 
 
 

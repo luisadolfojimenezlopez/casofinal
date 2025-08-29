@@ -49,7 +49,7 @@ public function messages()
 
 'address.required' => 'El campo dirección es obligatorio',
 'address.string'   => 'El campo dirección debe ser una cadena de texto',
-'address.min'      => 'El campo dirección debe tener al menos 5 caracteres',
+'address.min'      => 'El campo dirección debe tener al menos 2 caracteres',
 'address.max'      => 'El campo dirección no debe exceder los 255 caracteres',
 
 'telephone.required' => 'El campo teléfono es obligatorio',
@@ -59,7 +59,7 @@ public function messages()
 
 'email.required' => 'El campo correo electrónico es obligatorio',
 'email.email'    => 'El campo correo electrónico debe ser una dirección de correo válida',
-'email.min'      => 'El campo correo electrónico debe tener al menos 5 caracteres',
+'email.min'      => 'El campo correo electrónico debe tener al menos 2 caracteres',
 'email.max'      => 'El campo correo electrónico no debe exceder los 255 caracteres',
 'email.unique'   => 'El correo electrónico ya está en uso',
 
@@ -73,7 +73,7 @@ public function messages()
 
 'ID_document.required' => 'El campo documento de identificación es obligatorio',
 'ID_document.string'   => 'El campo documento de identificación debe ser una cadena de texto',
-'ID_document.min'      => 'El campo documento de identificación debe tener al menos 3 caracteres',
+'ID_document.min'      => 'El campo documento de identificación debe tener al menos 1 caracteres',
 'ID_document.max'      => 'El campo documento de identificación no debe exceder los 20 caracteres',
 
 'country.required' => 'El campo país es obligatorio',

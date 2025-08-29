@@ -21,6 +21,7 @@ class Area extends Model
         'cleaning',
         'administration',
         'accounting',
+        'employee_id'
 
     ];
     protected $casts = [

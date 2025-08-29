@@ -94,7 +94,7 @@
 <div class="form-group">
 
                 <label for="form-control-label" form="employee_id">ID del empleado</label>
-                <input type="text" id="employee_id" name="employee_id" class="form-control form-control-alternative"
+                <input type="number" id="employee_id" name="employee_id" class="form-control form-control-alternative"
                     placeholder="ID del empleado" value="{{old('employee_id',$areas->employee_id)}}">
             </div>
 
